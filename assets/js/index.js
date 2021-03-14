@@ -20,3 +20,24 @@ axios
       $(".text-avatar-box").show().children().text(name[0].toUpperCase());
     }
   });
+
+// 退出功能
+$(function () {
+  //  删除本地存储的token
+  //  跳转页面到 `/login.html`
+  $("#btnLogout").click(function () {
+    //  删除本地存储的token
+    layer.confirm(
+      "确认要退出吗？",
+      { icon: 3, title: "温馨提示" },
+      function (index) {
+        //do something
+        layer.close(index); //关闭窗口
+        // 清除token
+        localStorage.removeItem("token");
+        // 跳转页面
+        location.href = "login.html";
+      }
+    );
+  });
+});
