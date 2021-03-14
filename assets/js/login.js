@@ -36,18 +36,16 @@ $(function () {
     // console.log(data);
 
     // 提交请求
-    axios
-      .post("http://ajax.frontend.itheima.net/api/reguser", data)
-      .then(function (res) {
-        console.log(res);
-        if (res.data.status !== 0) {
-          return layer.msg("注册失败，" + res.data.message);
-        } else {
-          layer.msg(res.data.message);
-          // 注册成功跳转至登录页面（触发登录的点击事件）
-          $("#showLogin").click();
-        }
-      });
+    axios.post("/api/reguser", data).then(function (res) {
+      console.log(res);
+      if (res.data.status !== 0) {
+        return layer.msg("注册失败，" + res.data.message);
+      } else {
+        layer.msg(res.data.message);
+        // 注册成功跳转至登录页面（触发登录的点击事件）
+        $("#showLogin").click();
+      }
+    });
   });
 
   // 实现登录效果
@@ -61,20 +59,18 @@ $(function () {
     console.log(data);
 
     // 提交请求
-    axios
-      .post("http://ajax.frontend.itheima.net/api/login", data)
-      .then(function (res) {
-        console.log(res);
-        if (res.data.status !== 0) {
-          return layer.msg(res.data.message);
-        } else {
-          // 本地储存token，
-          localStorage.setItem("token", res.data.token);
+    axios.post("/api/login", data).then(function (res) {
+      console.log(res);
+      if (res.data.status !== 0) {
+        return layer.msg(res.data.message);
+      } else {
+        // 本地储存token，
+        localStorage.setItem("token", res.data.token);
 
-          layer.msg(res.data.message, function () {
-            location.href = "index.html";
-          });
-        }
-      });
+        layer.msg(res.data.message, function () {
+          location.href = "index.html";
+        });
+      }
+    });
   });
 });
